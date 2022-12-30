@@ -1,7 +1,8 @@
 local M = {}
 
 local timers = {}
-references = {}
+local references = {}
+_G.illuminate_references = references
 local paused_bufs = {}
 
 -- returns r1 < r2 based on start of range
