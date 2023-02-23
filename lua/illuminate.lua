@@ -57,6 +57,7 @@ local function handle_document_highlight(result, bufnr, client_id)
     local btimer = timers[bufnr]
     if btimer then
         vim.loop.timer_stop(btimer)
+        -- vim.loop.close(btimer)
     end
     if type(result) ~= 'table' then
         vim.lsp.util.buf_clear_references(bufnr)
@@ -282,6 +283,18 @@ end
 
 function M.debug()
     require('illuminate.engine').debug()
+end
+
+function M.is_paused()
+    return require('illuminate.engine').is_paused()
+end
+
+function M.set_highlight_defaults()
+    vim.cmd [[
+    hi def IlluminatedWordText guifg=none guibg=none gui=underline
+    hi def IlluminatedWordRead guifg=none guibg=none gui=underline
+    hi def IlluminatedWordWrite guifg=none guibg=none gui=underline
+    ]]
 end
 
 return M

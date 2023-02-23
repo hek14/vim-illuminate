@@ -44,9 +44,11 @@ lua << EOF
     end
 EOF
 
-hi def IlluminatedWordText gui=underline
-hi def IlluminatedWordRead gui=underline
-hi def IlluminatedWordWrite gui=underline
+lua require('illuminate').set_highlight_defaults()
+augroup vim_illuminate_autocmds
+    autocmd!
+    autocmd ColorScheme * lua require('illuminate').set_highlight_defaults()
+augroup END
 
 finish
 end
