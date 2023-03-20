@@ -2,6 +2,8 @@ local M = {}
 
 local timers = {}
 local references = {}
+_G.illuminate_references = references
+_G.illuminate_update_tick = {}
 local paused_bufs = {}
 
 -- returns r1 < r2 based on start of range
@@ -76,6 +78,7 @@ local function handle_document_highlight(result, bufnr, client_id)
         return before_by_start(a.range, b.range)
     end)
     references[bufnr] = result
+    _G.illuminate_update_tick[bufnr] = vim.loop.random(10)
 end
 
 local function valid(bufnr, range)
